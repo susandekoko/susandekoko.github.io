@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sande Ko Ko · Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* VOICE: confident, editorial, personal — a BI specialist's poster of herself
+   IDEA: a magazine cover crossed with a printed data report
+   PICTURE: portrait in a dotted halftone frame, tilted label chips, name running behind
+   COLOUR and TYPE: paper white, ink, Vienna-tram red as the one field colour; Instrument Serif + Instrument Sans
+   LAYOUT: full-screen hero, red ticker band, card list, timeline, chips, big contact band */
+:root{color-scheme:light dark;
+--bg:light-dark(#fbfbf9,#111214);--ink:light-dark(#16181d,#eeeee9);--mute:light-dark(#5d616b,#a3a7b0);
+--line:light-dark(#e3e3de,#2a2c31);--card:light-dark(#ffffff,#18191c);--red:#c8102e;--redink:#fff;--chip:light-dark(#f1f1ec,#22242a)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Instrument Sans",system-ui,sans-serif;overflow-x:clip}
+a{color:inherit}
+.serif{font-family:"Instrument Serif",Georgia,serif;font-weight:400}
+.band{padding:clamp(48px,7vw,104px) max(5vw,16px)}
+.wrap{max-width:1240px;margin:0 auto}
+h2{font:400 clamp(40px,6vw,64px)/1.02 "Instrument Serif",Georgia,serif;margin:0 0 36px;text-wrap:balance}
+h3{font:600 20px/1.3 "Instrument Sans",sans-serif;margin:0}
+
+/* nav */
+header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+nav{max-width:1240px;margin:0 auto;display:flex;align-items:center;gap:20px;padding:12px max(5vw,16px);flex-wrap:wrap}
+.logo{font:400 26px/1 "Instrument Serif",serif;text-decoration:none;color:var(--red)}
+.links{display:flex;gap:22px;margin-left:auto;flex-wrap:wrap}
+.links a{text-decoration:none;font-size:14px;color:var(--mute)}.links a:hover{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 22px;border-radius:999px;font:500 15px "Instrument Sans",sans-serif;text-decoration:none;border:1.5px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer}
+.btn.fill{background:var(--red);border-color:var(--red);color:var(--redink)}
+.btn:focus-visible,a:focus-visible,label:focus-within{outline:3px solid var(--red);outline-offset:3px}
+
+/* hero */
+.hero{position:relative;min-height:min(92vh,900px);display:grid;place-items:center;padding:56px 16px 40px;overflow:hidden}
+.marquee{position:absolute;left:0;right:0;white-space:nowrap;font:400 clamp(90px,17vw,240px)/1 "Instrument Serif",serif;color:var(--ink);opacity:.07;pointer-events:none}
+.marquee span{display:inline-block;animation:slide 40s linear infinite}
+.m1{top:8%}.m2{bottom:6%}.m2 span{animation-direction:reverse}
+@keyframes slide{to{transform:translateX(-50%)}}
+.stage{position:relative;width:min(440px,78vw);aspect-ratio:4/5}
+.portrait{position:absolute;inset:0;border-radius:220px 220px 28px 28px;overflow:hidden;background:
+ radial-gradient(circle at 1.5px 1.5px,color-mix(in srgb,var(--ink) 22%,transparent) 1.2px,transparent 1.6px) 0 0/14px 14px,
+ linear-gradient(160deg,var(--chip),color-mix(in srgb,var(--red) 14%,var(--chip)));display:grid;place-items:center;cursor:pointer;box-shadow:0 30px 60px -30px rgba(0,0,0,.35)}
+.portrait img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 12%}
+.lang{display:flex;gap:2px;padding:3px;border:1px solid var(--line);border-radius:99px}
+.lang button{min-height:36px;min-width:44px;border:0;border-radius:99px;background:transparent;color:var(--ink);font:600 13px "Instrument Sans",sans-serif;cursor:pointer}
+.lang button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+.lang button:focus-visible{outline:3px solid var(--red)}
+.portrait .mono{font:italic 400 clamp(110px,22vw,180px)/1 "Instrument Serif",serif;color:var(--red)}
+.portrait .hint{position:absolute;bottom:18px;font-size:13px;color:var(--mute);background:var(--bg);padding:6px 12px;border-radius:99px}
+.portrait.has .mono,.portrait.has .hint{display:none}
+.portrait input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.tag{position:absolute;padding:10px 16px;border-radius:16px;background:var(--card);color:var(--ink);box-shadow:0 10px 30px -12px rgba(0,0,0,.3);line-height:1.15;white-space:nowrap;animation:bob 6s ease-in-out infinite}
+.tag b{display:block;font:400 22px "Instrument Serif",serif}.tag small{font-size:13px;color:var(--mute)}
+.t1{top:16%;left:-30%;background:var(--red);color:#fff;border-radius:99px;transform:rotate(-6deg);font:400 21px "Instrument Serif",serif}
+.t2{top:46%;left:-36%;transform:rotate(-4deg);animation-delay:-2s}
+.t3{top:30%;right:-32%;transform:rotate(5deg);animation-delay:-4s}
+.t4{bottom:16%;left:-22%;background:transparent;border:1.5px solid var(--ink);border-radius:99px;box-shadow:none;transform:rotate(-3deg);font:400 20px "Instrument Serif",serif}
+.t5{bottom:24%;right:-26%;border-radius:99px;transform:rotate(-5deg);font-size:14px}
+@keyframes bob{50%{translate:0 -8px}}
+.status{position:absolute;top:18px;left:50%;translate:-50% 0;background:var(--card);border:1px solid var(--line);padding:8px 16px;border-radius:99px;font-size:14px;white-space:nowrap}
+.status i{display:inline-block;width:8px;height:8px;border-radius:50%;background:#2fa36b;margin-right:8px;vertical-align:1px}
+.cta{position:absolute;bottom:22px;left:50%;translate:-50% 0;display:flex;gap:10px;padding:6px;border-radius:99px;background:color-mix(in srgb,var(--bg) 70%,transparent);backdrop-filter:blur(8px)}
+h1{position:absolute;left:-9999px}
+
+/* ticker */
+.ticker{background:var(--red);color:#fff;overflow:hidden;white-space:nowrap;padding:14px 0;font:400 22px "Instrument Serif",serif}
+.ticker span{display:inline-block;animation:slide 30s linear infinite}
+
+.statement{text-align:center}
+.statement p{font:400 clamp(30px,4.6vw,54px)/1.12 "Instrument Serif",serif;margin:0 auto;max-width:900px;text-wrap:balance}
+.statement p em{color:var(--red)}
+.statement small{display:block;margin-top:18px;color:var(--mute);font-size:17px}
+
+/* projects */
+.proj{display:grid;gap:18px}
+.card{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:clamp(20px,4vw,48px);background:var(--card);border:1px solid var(--line);border-radius:24px;padding:clamp(22px,3.5vw,40px)}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 14px}
+.meta span{font-size:13px;padding:4px 12px;border-radius:99px;background:var(--chip)}
+.meta span.st{background:color-mix(in srgb,var(--red) 14%,transparent);color:var(--red)}
+.card p{margin:0 0 10px;color:var(--mute);max-width:62ch}
+.viz{border-radius:16px;background:var(--chip);min-height:180px;display:grid;place-items:center;padding:16px}
+.viz svg{width:100%;height:auto;max-height:200px}
+
+/* experience */
+.tl{border-left:1.5px solid var(--line);margin-left:6px}
+.job{position:relative;padding:0 0 34px 30px;display:grid;grid-template-columns:150px minmax(0,1fr);gap:16px}
+.job::before{content:"";position:absolute;left:-7px;top:7px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--red)}
+.job .yr{font:400 22px/1.2 "Instrument Serif",serif;color:var(--red);white-space:nowrap}
+.job .org{color:var(--mute);font-size:15px;margin:2px 0 6px}
+.job p{margin:0;max-width:64ch}
+
+/* skills */
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:36px}
+.lbl{font-size:15px;color:var(--mute);margin:0 0 12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px}
+.chips span{padding:8px 14px;border-radius:99px;border:1px solid var(--line);background:var(--card);font-size:15px}
+.chips span small{color:var(--red);margin-left:6px}
+
+/* contact */
+.contact{background:var(--ink);color:var(--bg);text-align:center}
+.contact .big{display:block;font:400 clamp(52px,11vw,150px)/.95 "Instrument Serif",serif;text-decoration:none;color:var(--bg);margin:14px 0 30px}
+.contact .big:hover{color:var(--red)}
+.contact .row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.contact .btn{border-color:var(--bg);color:var(--bg)}.contact .btn.fill{color:#fff;border-color:var(--red)}
+.contact .addr{margin-top:16px;color:color-mix(in srgb,var(--bg) 65%,transparent);font-size:14px}
+footer{padding:22px max(5vw,16px);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:14px;color:var(--mute)}
+
+.lang{margin-left:16px}
+@media(max-width:900px){.links{display:none}.lang{margin-left:auto}.card{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:700px){
+ .tag{font-size:15px!important;padding:7px 12px}.tag b{font-size:17px}
+ .t1{left:-6%;top:4%}.t2{left:-8%;top:56%}.t3{right:-6%;top:22%}.t4{left:-4%;bottom:6%}.t5{right:-6%;bottom:16%}
+ .job{grid-template-columns:minmax(0,1fr);gap:4px}
+ .status{font-size:13px}.cta{position:static;translate:none;margin-top:22px}.hero{display:flex;flex-direction:column;justify-content:center}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header><nav>
+ <a class="logo" href="#home">SK</a>
+ <div class="links"><a href="#projects" data-i="nProj">Projects</a><a href="#approach" data-i="nAppr">Approach</a><a href="#experience" data-i="nExp">Experience</a><a href="#skills" data-i="nSkills">Skills</a><a href="#contact" data-i="nContact">Contact</a></div>
+ <div class="lang" role="group" aria-label="Language"><button type="button" data-l="en" aria-pressed="true">EN</button><button type="button" data-l="de" aria-pressed="false">DE</button></div>
+</nav></header>
+
+<main>
+<section class="hero" id="home">
+ <h1>Sande Ko Ko — Senior Business Intelligence specialist in Vienna</h1>
+ <div class="marquee m1" aria-hidden="true"><span>Sande Ko Ko · Sande Ko Ko · Sande Ko Ko · Sande Ko Ko · </span></div>
+ <div class="marquee m2" aria-hidden="true"><span>Sande Ko Ko · Sande Ko Ko · Sande Ko Ko · Sande Ko Ko · </span></div>
+ <div class="status"><i></i><span data-i="status">Open to work in Vienna</span></div>
+ <div class="stage">
+  <div class="portrait"><img src="img/portrait.jpg" alt="Portrait of Sande Ko Ko"></div>
+  <div class="tag t1">Business Intelligence × AI</div>
+  <div class="tag t2"><b>Senior BI Manager</b><small data-i="t2">FoodNotify, Vienna</small></div>
+  <div class="tag t3"><b data-i="t3a">12+ years</b><small data-i="t3b">in IT · 4+ in BI</small></div>
+  <div class="tag t4" data-i="t4">Vienna ⇄ Yangon</div>
+  <div class="tag t5">MY · EN · DE</div>
+ </div>
+ <div class="cta"><a class="btn fill" href="#contact" data-i="cv">Download CV</a><a class="btn" href="mailto:susandekoko@outlook.com" data-i="mail">Email me</a></div>
+</section>
+
+<div class="ticker" aria-hidden="true"><span>Data pipelines to dashboards · PostgreSQL · ClickHouse · Python · Superset · Vienna ⇄ Yangon · Data pipelines to dashboards · PostgreSQL · ClickHouse · Python · Superset · Vienna ⇄ Yangon · </span></div>
+
+<section class="band statement">
+ <p data-i="stmt">I build the whole path from <em>raw data</em> to the dashboard a team actually uses.</p>
+ <small data-i="stmt2">Senior BI Manager · Master’s in Computer Science · based in Vienna</small>
+</section>
+
+<section class="band" id="projects" style="padding-top:0"><div class="wrap">
+ <h2 data-i="hProj">Selected work</h2>
+ <div class="proj" id="projList"></div>
+</div></section>
+
+<section class="band" id="approach" style="background:var(--chip)"><div class="wrap grid2">
+ <div><h2 style="margin-bottom:18px" data-i="hAppr">How I work</h2>
+  <p style="color:var(--mute);max-width:52ch;margin:0" data-i="appr">I own BI delivery end to end: the pipeline, the model, and the client-facing dashboard. Day to day I sit between developers, Customer Success and Finance, translating what each team needs into numbers they can trust.</p></div>
+ <div id="approachList"></div>
+</div></section>
+
+<section class="band" id="experience"><div class="wrap">
+ <h2 data-i="hExp">Experience</h2>
+ <div class="tl" id="tl"></div>
+</div></section>
+
+<section class="band" id="skills" style="padding-top:0"><div class="wrap">
+ <h2 data-i="hSkills">Skills</h2>
+ <div class="grid2">
+  <div><p class="lbl" data-i="s1">Data &amp; engineering</p><div class="chips" id="c1"></div>
+       <p class="lbl" data-i="s2">BI &amp; visualisation</p><div class="chips" id="c2"></div></div>
+  <div><p class="lbl" data-i="s3">Working with people</p><div class="chips" id="c3"></div>
+       <p class="lbl" data-i="s4">Languages</p><div class="chips" id="c4"></div></div>
+ </div>
+</div></section>
+
+<section class="band contact" id="contact">
+ <div style="font-size:15px;opacity:.7" data-i="nContact">Contact</div>
+ <a class="big" href="mailto:susandekoko@outlook.com" data-i="big">Let’s talk data</a>
+ <div class="row">
+  <a class="btn fill" href="mailto:susandekoko@outlook.com">Email</a>
+  <a class="btn" href="https://www.linkedin.com/in/su-sande-ko-ko/">LinkedIn</a>
+  <a class="btn" href="#" data-i="cv">Download CV</a>
+ </div>
+ <div class="addr" data-i="addr">susandekoko@outlook.com · linkedin.com/in/su-sande-ko-ko</div>
+</section>
+</main>
+<footer><span data-i="foot">© 2026 Sande Ko Ko · Vienna</span><a href="#" data-i="legal">Impressum &amp; privacy</a></footer>
+
+<script>
+{
+const T={
+en:{nProj:"Projects",nAppr:"Approach",nExp:"Experience",nSkills:"Skills",nContact:"Contact",status:"Open to work in Vienna",t2:"FoodNotify, Vienna",t3a:"12+ years",t3b:"in IT · 4+ in BI",t4:"Vienna ⇄ Yangon",cv:"Download CV",mail:"Email me",
+ stmt:"I build the whole path from <em>raw data</em> to the dashboard a team actually uses.",stmt2:"Senior BI Manager · Master’s in Computer Science · based in Vienna",hProj:"Selected work",hAppr:"How I work",
+ appr:"I own BI delivery end to end: the pipeline, the model, and the client-facing dashboard. Day to day I sit between developers, Customer Success and Finance, translating what each team needs into numbers they can trust.",
+ hExp:"Experience",hSkills:"Skills",s1:"Data & engineering",s2:"BI & visualisation",s3:"Working with people",s4:"Languages",big:"Let’s talk data",addr:"susandekoko@outlook.com · linkedin.com/in/su-sande-ko-ko",foot:"© 2026 Sande Ko Ko · Vienna",legal:"Legal notice & privacy",tick:"Data pipelines to dashboards"},
+de:{nProj:"Projekte",nAppr:"Arbeitsweise",nExp:"Erfahrung",nSkills:"Skills",nContact:"Kontakt",status:"Offen für neue Jobs in Wien",t2:"FoodNotify, Wien",t3a:"12+ Jahre",t3b:"in der IT · 4+ in BI",t4:"Wien ⇄ Yangon",cv:"Lebenslauf herunterladen",mail:"E-Mail schreiben",
+ stmt:"Ich baue den ganzen Weg von den <em>Rohdaten</em> bis zum Dashboard, das ein Team wirklich nutzt.",stmt2:"Senior BI Manager · Master in Informatik · in Wien",hProj:"Ausgewählte Arbeiten",hAppr:"So arbeite ich",
+ appr:"Ich verantworte BI-Lösungen von Anfang bis Ende: die Datenpipeline, das Datenmodell und das Dashboard für Kund:innen. Im Alltag arbeite ich eng mit Entwicklung, Customer Success und Finance zusammen und übersetze ihre Anforderungen in Zahlen, denen sie vertrauen können.",
+ hExp:"Berufserfahrung",hSkills:"Kenntnisse",s1:"Daten & Engineering",s2:"BI & Visualisierung",s3:"Zusammenarbeit",s4:"Sprachen",big:"Reden wir über Daten",addr:"susandekoko@outlook.com · linkedin.com/in/su-sande-ko-ko",foot:"© 2026 Sande Ko Ko · Wien",legal:"Impressum & Datenschutz",tick:"Von Datenpipelines zu Dashboards"}
+};
+const P=[
+ {t:{en:"Cash-Flow Forecast & Sale Simulator",de:"Cashflow-Prognose & Sale Simulator"},tags:{en:["Finance","Python","Streamlit"],de:["Finance","Python","Streamlit"]},st:{en:"In use",de:"Im Einsatz"},
+  d:{en:["An interactive app that lets Finance simulate sales scenarios and see the effect on cash flow before committing to a plan.","Built from the database layer up to the Streamlit interface."],de:["Eine interaktive App, mit der Finance Verkaufsszenarien simulieren und die Auswirkung auf den Cashflow sehen kann, bevor ein Plan festgelegt wird.","Gebaut von der Datenbankebene bis zur Streamlit-Oberfläche."]},v:"line"},
+ {t:{en:"Claude × Superset via MCP",de:"Claude × Superset über MCP"},tags:{en:["AI","Superset","MCP"],de:["KI","Superset","MCP"]},st:{en:"Evaluation",de:"Evaluierung"},
+  d:{en:["Evaluated AI assistants connected directly to our BI platform, testing how well they answer real business questions against live data.","Presented findings to the CTO, CFO and engineering."],de:["Evaluierung von KI-Assistenten, die direkt an unsere BI-Plattform angebunden sind: Wie gut beantworten sie echte Geschäftsfragen auf Basis von Live-Daten?","Ergebnisse vor CTO, CFO und Entwicklung präsentiert."]},v:"chat"},
+ {t:{en:"Client dashboards for hotel & restaurant chains",de:"Kunden-Dashboards für Hotel- & Restaurantketten"},tags:{en:["Superset","ClickHouse","Client-facing"],de:["Superset","ClickHouse","Für Kund:innen"]},st:{en:"Live",de:"Live"},
+  d:{en:["Food-waste KPIs for kitchens and bars, ingredient cost variance, and a multi-location turnover and cost report.","Fast aggregate queries on ClickHouse with materialised views behind each report."],de:["Food-Waste-KPIs für Küche und Bar, Abweichungsanalyse der Wareneinsatzkosten und ein Umsatz- und Kostenreport über mehrere Standorte.","Schnelle Aggregationen in ClickHouse mit Materialized Views hinter jedem Report."]},v:"bars"},
+ {t:{en:"Commission Dashboard",de:"Provisions-Dashboard"},tags:{en:["Sales","Customer Success","Streamlit"],de:["Sales","Customer Success","Streamlit"]},st:{en:"In use",de:"Im Einsatz"},
+  d:{en:["One multi-tab dashboard that calculates Sales and Customer Success commissions across different schemes, replacing manual spreadsheet work."],de:["Ein Dashboard mit mehreren Tabs, das Provisionen für Sales und Customer Success nach unterschiedlichen Modellen berechnet und manuelle Excel-Arbeit ersetzt."]},v:"donut"},
+ {t:{en:"Tableau to Apache Superset migration",de:"Migration von Tableau zu Apache Superset"},tags:{en:["Tableau","Migration"],de:["Tableau","Migration"]},st:{en:"Delivered",de:"Abgeschlossen"},
+  d:{en:["Led the migration of the BI platform from Tableau to Apache Superset, keeping numbers consistent for clients."],de:["Leitung der Migration der BI-Plattform von Tableau zu Apache Superset, mit konsistenten Zahlen für die Kund:innen."]},v:"move"},
+ {t:{en:"Job-seeking AI agent",de:"KI-Agent für die Jobsuche"},tags:{en:["Python","AI agents","Side project"],de:["Python","KI-Agenten","Eigenes Projekt"]},st:{en:"In development",de:"In Entwicklung"},
+  d:{en:["A personal project: an agent that collects job postings and matches them against a profile, built while learning to develop AI agents."],de:["Ein persönliches Projekt: ein Agent, der Stellenanzeigen sammelt und mit einem Profil abgleicht – entstanden, während ich die Entwicklung von KI-Agenten lerne."]},v:"chat"}
+];
+const V={
+ line:'<svg viewBox="0 0 300 160"><polyline fill="none" stroke="currentColor" stroke-opacity=".25" stroke-width="2" stroke-dasharray="5 5" points="10,120 70,100 130,105 190,70 250,60 290,40"/><polyline fill="none" stroke="#c8102e" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" points="10,130 70,110 130,90 190,95 250,55 290,30"/><circle cx="290" cy="30" r="7" fill="#c8102e"/></svg>',
+ bars:'<svg viewBox="0 0 300 160">'+[60,95,72,120,88,140,110].map((h,i)=>`<rect x="${14+i*40}" y="${150-h}" width="26" height="${h}" rx="5" fill="${i==5?'#c8102e':'currentColor'}" fill-opacity="${i==5?1:.22}"/>`).join('')+'</svg>',
+ donut:'<svg viewBox="0 0 300 160"><circle cx="150" cy="80" r="56" fill="none" stroke="currentColor" stroke-opacity=".18" stroke-width="22"/><circle cx="150" cy="80" r="56" fill="none" stroke="#c8102e" stroke-width="22" stroke-dasharray="230 352" transform="rotate(-90 150 80)"/></svg>',
+ chat:'<svg viewBox="0 0 300 160"><rect x="20" y="20" width="170" height="40" rx="18" fill="currentColor" fill-opacity=".15"/><rect x="110" y="72" width="170" height="40" rx="18" fill="#c8102e"/><rect x="20" y="124" width="110" height="26" rx="13" fill="currentColor" fill-opacity=".15"/><rect x="134" y="86" width="110" height="6" rx="3" fill="#fff" fill-opacity=".8"/><rect x="134" y="98" width="70" height="6" rx="3" fill="#fff" fill-opacity=".8"/></svg>',
+ move:'<svg viewBox="0 0 300 160"><rect x="16" y="30" width="100" height="100" rx="14" fill="currentColor" fill-opacity=".15"/><rect x="184" y="30" width="100" height="100" rx="14" fill="#c8102e" fill-opacity=".9"/><path d="M128 80h40m-12-12 12 12-12 12" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round"/></svg>'
+};
+const A={en:[["End to end","From the SQL and data pipelines to the dashboard the client opens."],["Close to the business","Working directly with Finance, Customer Success and developers, not through layers."],["Curious about AI","Testing where AI assistants genuinely help people read their data, and where they don’t."]],
+ de:[["End-to-End","Von SQL und Datenpipelines bis zum Dashboard, das die Kund:innen öffnen."],["Nah am Business","Direkte Zusammenarbeit mit Finance, Customer Success und Entwicklung – ohne Umwege."],["Neugierig auf KI","Ich teste, wo KI-Assistenten Menschen wirklich helfen, ihre Daten zu verstehen – und wo nicht."]]};
+const J={en:[
+ ["2024 – now","Senior BI Manager","FoodNotify · Vienna","Joined as BI Manager and promoted to Senior BI Manager. Own BI delivery end to end for a platform serving hotel and restaurant chains: data pipelines, invoice API integrations, internal tools for Finance and Sales, and client-facing dashboards."],
+ ["2022","Freelance IT Consultant","P3S · Yangon","Short-term IT consulting engagement."],
+ ["2021 – 2022","Deputy Department Head & Project Lead","Mono Next PLC, Myanmar branch","Led projects and a department focused on telecom services; analysed market data, planned projects, and forecast and monitored delivery."],
+ ["2019 – 2020","Project Lead","Mono Next PLC, Myanmar branch","Led telecom service projects, including an education app delivered with the Ministry of Transport and Communications."],
+ ["2014 – 2018","Developer & Support Engineer","Mono Next PLC, Myanmar branch","Built and supported software for telecom services."],
+ ["2012 – 2014","Software Developer","ITEC Group · Bangkok","Software development in an international team."],
+ ["2014","Published paper","Machine learning · recommender systems","Research publication on recommender systems."],
+ ["Degree","Master’s in Computer Science","",""]],
+de:[
+ ["2024 – heute","Senior BI Manager","FoodNotify · Wien","Eingestiegen als BI Manager, befördert zum Senior BI Manager. Verantwortung für BI von Anfang bis Ende auf einer Plattform für Hotel- und Restaurantketten: Datenpipelines, API-Anbindungen für Rechnungen, interne Tools für Finance und Sales sowie Dashboards für Kund:innen."],
+ ["2022","Freiberufliche IT-Beraterin","P3S · Yangon","Kurzfristiges IT-Beratungsprojekt."],
+ ["2021 – 2022","Stellv. Abteilungsleiterin & Projektleiterin","Mono Next PLC, Niederlassung Myanmar","Leitung von Projekten und einer Abteilung im Bereich Telekommunikationsdienste; Marktdatenanalyse, Projektplanung, Prognose und Monitoring."],
+ ["2019 – 2020","Projektleiterin","Mono Next PLC, Niederlassung Myanmar","Leitung von Telekom-Projekten, darunter eine Bildungs-App mit dem Ministerium für Verkehr und Kommunikation."],
+ ["2014 – 2018","Entwicklerin & Support Engineer","Mono Next PLC, Niederlassung Myanmar","Entwicklung und Support von Software für Telekommunikationsdienste."],
+ ["2012 – 2014","Softwareentwicklerin","ITEC Group · Bangkok","Softwareentwicklung in einem internationalen Team."],
+ ["2014","Publikation","Machine Learning · Empfehlungssysteme","Wissenschaftliche Veröffentlichung zu Empfehlungssystemen."],
+ ["Studium","Master in Informatik","",""]]};
+const C={en:{c1:["SQL","PostgreSQL","ClickHouse","Python","pandas","REST API integrations","Linux scripting","Data modelling"],c2:["Apache Superset","Tableau","Streamlit","KPI design","Forecasting","AI assistants & MCP"],c3:["Project leadership","Stakeholder management","Finance & Sales partnering","Requirements to dashboards"],c4:[["Burmese","Native"],["English","Fluent"],["German","A2–B1"]]},
+ de:{c1:["SQL","PostgreSQL","ClickHouse","Python","pandas","REST-API-Anbindungen","Linux-Scripting","Datenmodellierung"],c2:["Apache Superset","Tableau","Streamlit","KPI-Design","Prognosen","KI-Assistenten & MCP"],c3:["Projektleitung","Stakeholder-Management","Partner für Finance & Sales","Von Anforderungen zu Dashboards"],c4:[["Burmesisch","Muttersprache"],["Englisch","Fließend"],["Deutsch","A2–B1"]]}};
+const $=id=>document.getElementById(id);
+const render=l=>{
+ document.documentElement.lang=l;
+ document.querySelectorAll('[data-i]').forEach(e=>{const s=T[l][e.dataset.i];if(s!=null)e.innerHTML=s});
+ const tk=`${T[l].tick} · PostgreSQL · ClickHouse · Python · Superset · ${T[l].t4} · `;document.querySelector('.ticker span').textContent=tk+tk;
+ $('projList').innerHTML=P.map(p=>`<article class="card"><div><h3 style="font:400 clamp(26px,3vw,34px)/1.15 'Instrument Serif',serif">${p.t[l]}</h3><div class="meta">${p.tags[l].map(t=>`<span>${t}</span>`).join('')}<span class="st">${p.st[l]}</span></div>${p.d[l].map(x=>`<p>${x}</p>`).join('')}</div><div class="viz">${V[p.v]}</div></article>`).join('');
+ $('approachList').innerHTML=A[l].map(a=>`<div style="padding:18px 0;border-top:1px solid var(--line)"><h3>${a[0]}</h3><p style="margin:6px 0 0;color:var(--mute)">${a[1]}</p></div>`).join('');
+ $('tl').innerHTML=J[l].map(j=>`<article class="job"><div class="yr">${j[0]}</div><div><h3>${j[1]}</h3>${j[2]?`<div class="org">${j[2]}</div>`:''}${j[3]?`<p>${j[3]}</p>`:''}</div></article>`).join('');
+ for(const k in C[l])$(k).innerHTML=C[l][k].map(x=>Array.isArray(x)?`<span>${x[0]}<small>${x[1]}</small></span>`:`<span>${x}</span>`).join('');
+ document.querySelectorAll('[data-i="cv"]').forEach(a=>{a.href=`cv/Su_Sande_Ko_Ko_CV_${l.toUpperCase()}.pdf`;a.target='_blank';a.rel='noopener'});
+ document.querySelectorAll('.lang button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.l===l));
+ try{localStorage.setItem('lang',l)}catch(e){}
+};
+document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>render(b.dataset.l)));
+let start='en';try{start=localStorage.getItem('lang')||((navigator.language||'').startsWith('de')?'de':'en')}catch(e){}
+render(start==='de'?'de':'en');
+
+}
+</script>
+</body>
+</html>
