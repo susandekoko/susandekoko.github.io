@@ -101,6 +101,13 @@ h1{position:absolute;left:-9999px}
 .mk-done{margin-top:12px;font-size:13px;color:var(--mute)}.mk-done b{color:var(--ink)}
 .mk-jobs .job-r{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 0;border-top:1px solid var(--line)}.mk-jobs .job-r:first-child{border-top:0}.job-r b{display:block;font-weight:600}.job-r small{color:var(--mute);font-size:12px}.job-r span{flex:none;font-size:12px;padding:3px 9px;border-radius:99px;background:var(--chip)}.job-r span.hi{background:var(--red);color:#fff}
 
+.cities{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:16px;margin-bottom:32px}
+.city{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:clamp(20px,3vw,32px)}
+.city b{display:block;font:400 clamp(36px,5vw,52px)/1 "Instrument Serif",serif;color:var(--red);margin:6px 0 10px}
+.city .yrs{font-size:14px;color:var(--mute)}.city p{margin:0;font-size:17px;max-width:46ch}
+.points{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 48px}
+@media(max-width:700px){.points{grid-template-columns:minmax(0,1fr)}}
+.pt{padding:18px 0;border-top:1px solid color-mix(in srgb,var(--ink) 15%,transparent)}.pt p{margin:6px 0 0;color:var(--mute)}
 /* experience */
 .tl{border-left:1.5px solid var(--line);margin-left:6px}
 .job{position:relative;padding:0 0 34px 30px;display:grid;grid-template-columns:150px minmax(0,1fr);gap:16px}
@@ -172,10 +179,10 @@ footer{padding:22px max(5vw,16px);display:flex;justify-content:space-between;fle
  <div class="proj" id="projList"></div>
 </div></section>
 
-<section class="band" id="approach" style="background:var(--chip)"><div class="wrap grid2">
- <div><h2 style="margin-bottom:18px" data-i="hAppr">How I work</h2>
-  <p style="color:var(--mute);max-width:52ch;margin:0" data-i="appr">I own BI delivery end to end: the pipeline, the model, and the client-facing dashboard. Day to day I sit between developers, Customer Success and Finance, translating what each team needs into numbers they can trust.</p></div>
- <div id="approachList"></div>
+<section class="band" id="approach" style="background:var(--chip)"><div class="wrap">
+ <h2 data-i="hAppr">How I work</h2>
+ <div class="cities" id="cities"></div>
+ <div class="points" id="approachList"></div>
 </div></section>
 
 <section class="band" id="experience"><div class="wrap">
@@ -211,11 +218,9 @@ footer{padding:22px max(5vw,16px);display:flex;justify-content:space-between;fle
 const T={
 en:{nProj:"Projects",nAppr:"Approach",nExp:"Experience",nSkills:"Skills",nContact:"Contact",status:"Open to work in Vienna",t2:"FoodNotify, Vienna",t3a:"12+ years",t3b:"in IT · 4+ in BI",t4:"Vienna ⇄ Yangon",cv:"Download CV",mail:"Email me",
  stmt:"I build the whole path from <em>raw data</em> to the dashboard a team actually uses.",stmt2:"Senior BI Manager · Master’s in Computer Science · based in Vienna",hProj:"Selected work",hAppr:"How I work",
- appr:"I own BI delivery end to end: the pipeline, the model, and the client-facing dashboard. Day to day I sit between developers, Customer Success and Finance, translating what each team needs into numbers they can trust.",
  hExp:"Experience",hSkills:"Skills",s1:"Data & engineering",s2:"BI & visualisation",s3:"Working with people",s4:"Languages",big:"Let’s talk data",addr:"susandekoko@outlook.com · linkedin.com/in/su-sande-ko-ko",foot:"© 2026 Sande Ko Ko · Vienna",legal:"Legal notice & privacy",tick:"Data pipelines to dashboards"},
 de:{nProj:"Projekte",nAppr:"Arbeitsweise",nExp:"Erfahrung",nSkills:"Skills",nContact:"Kontakt",status:"Offen für neue Jobs in Wien",t2:"FoodNotify, Wien",t3a:"12+ Jahre",t3b:"in der IT · 4+ in BI",t4:"Wien ⇄ Yangon",cv:"Lebenslauf herunterladen",mail:"E-Mail schreiben",
  stmt:"Ich baue den ganzen Weg von den <em>Rohdaten</em> bis zum Dashboard, das ein Team wirklich nutzt.",stmt2:"Senior BI Manager · Master in Informatik · in Wien",hProj:"Ausgewählte Arbeiten",hAppr:"So arbeite ich",
- appr:"Ich verantworte BI-Lösungen von Anfang bis Ende: die Datenpipeline, das Datenmodell und das Dashboard für Kund:innen. Im Alltag arbeite ich eng mit Entwicklung, Customer Success und Finance zusammen und übersetze ihre Anforderungen in Zahlen, denen sie vertrauen können.",
  hExp:"Berufserfahrung",hSkills:"Kenntnisse",s1:"Daten & Engineering",s2:"BI & Visualisierung",s3:"Zusammenarbeit",s4:"Sprachen",big:"Reden wir über Daten",addr:"susandekoko@outlook.com · linkedin.com/in/su-sande-ko-ko",foot:"© 2026 Sande Ko Ko · Wien",legal:"Impressum & Datenschutz",tick:"Von Datenpipelines zu Dashboards"}
 };
 const P=[
@@ -247,8 +252,10 @@ const V={
  agent:l=>`<div class="mk">${head(L(l,'Job agent · today','Job-Agent · heute'),'Python')}<div class="mk-jobs">${[['BI Analyst',92],['Data Analyst',84],['RevOps Analyst',71]].map((j,i)=>`<div class="job-r"><div><b>${j[0]}</b><small>${L(l,'Vienna','Wien')} · ${L(l,'posted today','heute veröffentlicht')}</small></div><span class="${i==0?'hi':''}">Match ${j[1]} %</span></div>`).join('')}</div></div>`
 };
 
-const A={en:[["End to end","From the SQL and data pipelines to the dashboard the client opens."],["Close to the business","Working directly with Finance, Customer Success and developers, not through layers."],["Curious about AI","Testing where AI assistants genuinely help people read their data, and where they don’t."]],
- de:[["End-to-End","Von SQL und Datenpipelines bis zum Dashboard, das die Kund:innen öffnen."],["Nah am Business","Direkte Zusammenarbeit mit Finance, Customer Success und Entwicklung – ohne Umwege."],["Neugierig auf KI","Ich teste, wo KI-Assistenten Menschen wirklich helfen, ihre Daten zu verstehen – und wo nicht."]]};
+const CI={en:[["Bangkok","Ten years of software and telecom projects, from developer to project lead.","2012 – 2022"],["Vienna","End-to-end BI for hotel and restaurant chains and internal teams, from data pipelines to the dashboards clients and colleagues open every day.","2024 – now"]],
+ de:[["Bangkok","Zehn Jahre Software- und Telekom-Projekte, von der Entwicklerin zur Projektleiterin.","2012 – 2022"],["Wien","End-to-End-BI für Hotel- und Restaurantketten und interne Teams, von Datenpipelines bis zu den Dashboards, die Kund:innen und Kolleg:innen täglich öffnen.","2024 – heute"]]};
+const A={en:[["One owner, whole path","SQL, pipelines, data models and dashboards. I build it and I stand behind the numbers."],["From project lead to builder","Years of leading projects in Thailand taught me to plan, forecast and deliver. Today I bring that to every dashboard I build."],["Curious about AI","I’m testing where AI assistants genuinely help people understand their data, and where they don’t."],["International by habit","I’ve worked in Thailand and in Austria, and I’m used to teams with different languages and working styles."]],
+ de:[["Eine Verantwortliche, der ganze Weg","SQL, Pipelines, Datenmodelle und Dashboards. Ich baue sie und stehe hinter den Zahlen."],["Von der Projektleitung zum Bauen","Jahre der Projektleitung in Thailand haben mich gelehrt zu planen, zu prognostizieren und zu liefern. Das bringe ich heute in jedes Dashboard ein."],["Neugierig auf KI","Ich teste, wo KI-Assistenten Menschen wirklich helfen, ihre Daten zu verstehen – und wo nicht."],["International aus Gewohnheit","Ich habe in Thailand und in Österreich gearbeitet und bin Teams mit verschiedenen Sprachen und Arbeitsweisen gewohnt."]]};
 const J={en:[
  ["2024 – now","Senior BI Manager","FoodNotify · Vienna","Joined as BI Manager and promoted to Senior BI Manager. Own BI delivery end to end for a platform serving hotel and restaurant chains: data pipelines, invoice API integrations, internal tools for Finance and Sales, and client-facing dashboards."],
  ["2022","Freelance IT Consultant","P3S · Yangon","Short-term IT consulting engagement."],
@@ -276,7 +283,8 @@ const render=l=>{
  const tk=`${T[l].tick} · PostgreSQL · ClickHouse · Python · Superset · ${T[l].t4} · `;document.querySelector('.ticker span').textContent=tk+tk;
  SD=L(l,'Sample data','Beispieldaten');
  $('projList').innerHTML=P.map(p=>`<article class="card"><div><h3 style="font:400 clamp(26px,3vw,34px)/1.15 'Instrument Serif',serif">${p.t[l]}</h3><div class="meta">${p.tags[l].map(t=>`<span>${t}</span>`).join('')}<span class="st">${p.st[l]}</span></div>${p.d[l].map(x=>`<p>${x}</p>`).join('')}</div><div class="viz">${V[p.v](l)}</div></article>`).join('');
- $('approachList').innerHTML=A[l].map(a=>`<div style="padding:18px 0;border-top:1px solid var(--line)"><h3>${a[0]}</h3><p style="margin:6px 0 0;color:var(--mute)">${a[1]}</p></div>`).join('');
+ $('cities').innerHTML=CI[l].map(c=>`<div class="city"><span class="yrs">${c[2]}</span><b>${c[0]}</b><p>${c[1]}</p></div>`).join('');
+ $('approachList').innerHTML=A[l].map(a=>`<div class="pt"><h3>${a[0]}</h3><p>${a[1]}</p></div>`).join('');
  $('tl').innerHTML=J[l].map(j=>`<article class="job"><div class="yr">${j[0]}</div><div><h3>${j[1]}</h3>${j[2]?`<div class="org">${j[2]}</div>`:''}${j[3]?`<p>${j[3]}</p>`:''}</div></article>`).join('');
  for(const k in C[l])$(k).innerHTML=C[l][k].map(x=>Array.isArray(x)?`<span>${x[0]}<small>${x[1]}</small></span>`:`<span>${x}</span>`).join('');
  document.querySelectorAll('[data-i="cv"]').forEach(a=>{a.href=`cv/Su_Sande_Ko_Ko_CV_${l.toUpperCase()}.pdf`;a.target='_blank';a.rel='noopener'});
